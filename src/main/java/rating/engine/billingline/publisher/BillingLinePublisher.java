@@ -15,10 +15,10 @@ import java.util.concurrent.CompletionException;
 public class BillingLinePublisher {
 
     private final KafkaConfigProperties kafkaConfigProperties;
-    private final KafkaTemplate<String, String> billingLineDataKafkaTemplate2;
+    private final KafkaTemplate<String, String> billingLineDataKafkaTemplate;
 
     public CompletableFuture<Void> sendAsync(String value) {
-        return billingLineDataKafkaTemplate2.send(kafkaConfigProperties.getBillingLineTopic(), value)
+        return billingLineDataKafkaTemplate.send(kafkaConfigProperties.getBillingLineTopic(), value)
                 .thenRun(() -> {
                 })
                 .exceptionally(ex -> {

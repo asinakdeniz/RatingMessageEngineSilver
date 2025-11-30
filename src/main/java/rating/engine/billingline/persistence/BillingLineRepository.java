@@ -51,23 +51,23 @@ public class BillingLineRepository {
         );
     }
 
-    public void saveAll(List<BillingLineEntity> entities) {
-        if (entities.isEmpty()) {
+    public void saveAll(List<BillingLineDto> billingLineDtos) {
+        if (billingLineDtos.isEmpty()) {
             return;
         }
 
         StringJoiner valuesJoiner = new StringJoiner(", ");
-        List<Object> params = new ArrayList<>(entities.size() * 7);
+        List<Object> params = new ArrayList<>(billingLineDtos.size() * 7);
 
-        for (BillingLineEntity entity : entities) {
+        for (BillingLineDto billingLineDto : billingLineDtos) {
             valuesJoiner.add("(?, ?, ?, ?, ?, ?, ?)");
-            params.add(entity.getId());
-            params.add(entity.getContractId());
-            params.add(Timestamp.from(entity.getStartDate()));
-            params.add(Timestamp.from(entity.getEndDate()));
-            params.add(entity.getProductId());
-            params.add(entity.getConsumption());
-            params.add(entity.getStatus().name());
+            params.add(billingLineDto.getId());
+            params.add(billingLineDto.getContractId());
+            params.add(Timestamp.from(billingLineDto.getStartDate()));
+            params.add(Timestamp.from(billingLineDto.getEndDate()));
+            params.add(billingLineDto.getProductId());
+            params.add(billingLineDto.getConsumption());
+            params.add(billingLineDto.getStatus().name());
         }
 
         String sql = """

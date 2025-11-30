@@ -1,7 +1,6 @@
 package rating.engine.infrastructure.kafka;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,6 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,9 +28,6 @@ public class KafkaConfigProperties {
 
     @NotEmpty
     private final String clientId;
-
-    @NotNull
-    private final URI schemaRegistryUrl;
 
     @NotEmpty
     private final String billingLineTopic;

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import rating.engine.billingline.persistence.BillingLineEntity;
+import rating.engine.billingline.dto.BillingLineDto;
 import rating.engine.billingline.persistence.BillingLineRepository;
 
 import java.math.BigDecimal;
@@ -26,18 +26,18 @@ public class BillingLineTestDataGenerator {
         int batchSize = 5000;
         int totalBatches = 100;
         for (long i = 0; i < totalBatches; i++) {
-            List<BillingLineEntity> billingLineEntities = new ArrayList<>();
+            List<BillingLineDto> billingLineEntities = new ArrayList<>();
             for (long j = 0; j < batchSize; j++) {
                 Long uniqueId = i * batchSize + j;
-                BillingLineEntity entity = createBillingLineEntity(uniqueId);
-                billingLineEntities.add(entity);
+                BillingLineDto billingLineDto = createBillingLine(uniqueId);
+                billingLineEntities.add(billingLineDto);
             }
             billingLineRepository.saveAll(billingLineEntities);
         }
     }
 
-    private BillingLineEntity createBillingLineEntity(Long id) {
-        return BillingLineEntity.builder()
+    private BillingLineDto createBillingLine(Long id) {
+        return BillingLineDto.builder()
                 .id(id)
                 .contractId("CONTRACT_" + id)
                 .startDate(Instant.now())

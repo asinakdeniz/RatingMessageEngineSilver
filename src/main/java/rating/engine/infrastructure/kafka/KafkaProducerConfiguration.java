@@ -20,7 +20,7 @@ public class KafkaProducerConfiguration {
     private final KafkaConfigProperties kafkaConfigProperties;
 
     @Bean
-    public KafkaTemplate<String, String> billingLineDataKafkaTemplate2() {
+    public KafkaTemplate<String, String> billingLineDataKafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
